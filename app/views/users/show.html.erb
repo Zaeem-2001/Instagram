@@ -1,2 +1,12 @@
 <%= @user.full_name%>
+<br>
+<%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
+<% @posts.each do |p|%>
+  <br>
+  <%= p.caption%>
+  <%= link_to 'Edit Post' , edit_post_path(p) if @user==current_user %>
+  <%= link_to 'Delete Post' , post_path(p), method: :delete if @user==current_user %>
+  <br>
+<%end%>
+
 
