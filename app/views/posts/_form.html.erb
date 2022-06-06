@@ -5,6 +5,11 @@
     <%= f.text_area  :caption , autofocus: true, autocomplete: "caption" %>
 </div>
 
+<div class="field">
+    <%= f.label :images %><br />
+    <%= f.file_field :images , accept:'image/*',multiple: true,autofocus: true, autocomplete: "image" %>
+  </div>
+
 <div class="actions">
     <%= f.submit  %>
   </div>
