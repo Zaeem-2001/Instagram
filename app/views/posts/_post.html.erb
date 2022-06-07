@@ -1,0 +1,21 @@
+<div class="container border">
+<%= @user.full_name%></h3>
+<br>
+<span><%= @user.username%></span>
+<br>
+<%=  time_ago_in_words(@post.created_at) + ' ago'%>
+<br>
+<h3><%= @post.caption%></h3>
+<br>
+
+<% @post.images.each do |image|%>
+  <%=image_tag (image), size: "200x200" %>
+<%end%>
+<div class="container border">
+<h2>Comments</h2>
+<%= render @post.comments %>
+</div>
+<div class="container border">
+<%= render 'comments/form' %>
+</div>
+</div>

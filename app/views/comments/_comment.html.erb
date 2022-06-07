@@ -1,0 +1,13 @@
+<p>
+  <strong><%=User.find(comment.user_id).username%></strong>
+  <br>
+  <%=  time_ago_in_words(comment.created_at) + ' ago'%>
+  <br>
+  <%= comment.body %>
+</p>
+
+<p>
+  <%# <%= link_to 'Destroy Comment',[post_comment_path, comment], method: :delete%>
+</p>
+
+

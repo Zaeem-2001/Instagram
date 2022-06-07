@@ -1,13 +1,1 @@
-<div class="container border">
-<%= @user.full_name%></h3>
-<br>
-<span><%= @user.username%></span>
-<br>
-<br>
-<%= @post.caption%>
-<br>
-
-<% @post.images.each do |image|%>
-  <%=image_tag (image), size: "200x200" %>
-<%end%>
-</div>
+<%= render 'post'%>
