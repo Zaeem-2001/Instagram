@@ -1,7 +1,7 @@
 <div class="container border">
-<%= @user.full_name%></h3>
+<%= @post.full_name %></h3>
 <br>
-<span><%= @user.username%></span>
+<span><%= @post.username%></span>
 <br>
 <%=  time_ago_in_words(@post.created_at) + ' ago'%>
 <br>
@@ -13,7 +13,7 @@
 <%end%>
 <div class="container border">
 <h2>Comments</h2>
-<%= render @post.comments %>
+<%= render partial: 'comments/comment' %>
 </div>
 <div class="container border">
 <%= render 'comments/form' %>

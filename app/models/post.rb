@@ -3,4 +3,6 @@ class Post < ApplicationRecord
   has_many_attached :images
 
   has_many :comments , dependent: :destroy
+
+  delegate :full_name, :username, to: :user
 end

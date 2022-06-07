@@ -1,11 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: %i[create destroy]
+
   def create
-    @comment = current_user.comments.build(comments_params)
-    @comment.post_id=params[:post_id]
+    @comment = Comment.new(comments_params)
     if @comment.save
-       redirect_to current_user
-      else
-        flash[:alert] = "Something went wrong"
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:alert] = "Something went wrong"
     end
   end
 
@@ -14,15 +15,19 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # @post = Post.find(params[:post_id])
-    # @comment = @post.comments.find(params[:id])
-    # byebug
-    # @comment.destroy
-    # # redirect_to post_path(@post)
+    @comment = @post.comments.find(params[:id])
+    if @comment.destroy
+    redirect_to @post
+    end
+
   end
 
   private
   def comments_params
-    params.require(:comment).permit(:body ,:post_id)
+    params.require(:comment).permit(:body).merge(user_id: current_user.id, post_id: @post.id)
+  end
+
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 end

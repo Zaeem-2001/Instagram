@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @user = User.find_by(id: @post.user_id)
+    @comments = @post.comments.all.order('created_at DESC')
   end
 
   def edit
