@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :posts , dependent: :destroy
 
   has_one_attached :image
+
+  has_many :comments
 end
