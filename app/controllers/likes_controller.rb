@@ -12,7 +12,7 @@ class LikesController < ApplicationController
 
   def destroy
     if !(already_liked?)
-      flash[:notice] ="cannot unlik"
+      flash[:notice] ="cannot unlike"
     else
       @like=@post.likes.find(params[:id])
       @like.destroy

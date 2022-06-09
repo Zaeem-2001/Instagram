@@ -66,3 +66,5 @@ gem 'jquery-rails'
 
 
 gem 'activestorage'
+
+gem 'sidekiq'

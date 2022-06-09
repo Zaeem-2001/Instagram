@@ -1,4 +1,6 @@
-<%= form_with model: @post, remote: true do |f| %>
+<h1>New Story</h1>
+
+<%= form_with model: @story, local: true do |f| %>
 
 <div class="field">
     <%= f.label :caption %><br />
@@ -6,8 +8,8 @@
 </div>
 
 <div class="field">
-    <%= f.label :images %><br />
-    <%= f.file_field :images , accept:'image/*',multiple: true,autofocus: true, autocomplete: "image" %>
+    <%= f.label :image %><br />
+    <%= f.file_field :image , accept:'image/*',autofocus: true, autocomplete: "image" %>
   </div>
 
 <div class="actions">
