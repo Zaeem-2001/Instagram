@@ -1,43 +1,77 @@
-<%=image_tag (@user.image), size: "100x100" %>
-<br>
-<%= @user.full_name%>
-<br>
-@<%= @user.username%>
-
-<%# Stories %>
-<div>
-<p>Stories</p>
-<% @story=@user.stories.all%>
-<% @story.each do |story| %>
-<%= render 'stories/story' , story: story%>
-<% end%>
-</div>
-
-
-
-
-<br>
-<%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
-<br>
-<%= link_to 'Create a new Story' ,  new_story_path if @user==current_user %>
-<br>
-<%= link_to 'Edit Account' , edit_user_registration_path if @user==current_user %>
-
-<br>
-<br>
-<h2>Posts</h2>
-<% @posts.each do |p|%>
-<div class="container border">
-  <br>
-  <%= link_to 'Edit Post' , edit_post_path(p) if @user==current_user %>
-  <%= link_to 'Delete Post' , post_path(p), method: :delete if @user==current_user %>
-  <br>
-    <%= p.caption%>
-<br>
-  <% p.images.each do |image|%>
-  <%=image_tag (image), size: "100x100" %>
-  <%end%>
+<div class="conatiner user">
+  <div class="row">
+    <div class="col-sm-4 user-image">
+      <%=image_tag (@user.image), class: 'rounded-circle' , size: "150x150" %>
+    </div>
+    <div class="col-sm-8">
+      <div class="row user-username">
+        <h2><%= @user.username%> <%= link_to 'Edit Profile' , edit_user_registration_path, class: 'btn btn-light border' if @user==current_user %></h2>
+      </div>
+      <div class="row user-username">
+        <ul >
+          <li><%= @user.posts.count%> <%= (@user.posts.count) == 1 ? 'Post' : 'Posts' %></li>
+          <li>followers</li>
+          <li>following</li>
+        </ul>
+      </div>
+      <div class="row user-username">
+        <span><%= @user.full_name%></span>
+      </div>
+    </div>
   </div>
-<%end%>
+  <% @story=@user.stories.all%>
+  <div class="stories-container">
 
+    <% @story.each do |s| %>
+      <div class="content">
+        <%= image_tag (s.image)  if s.image.attached? %>
+      </div>
+    <%end%>
 
+  </div>
+  <div class="stories-full">
+    <div class="content">
+      <div class="close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
+      <div class="left-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+      </div>
+      <%= image_tag (@story.first.image)  if @story.first.image.attached? %>
+      <div class="right-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </div>
+      <div class="title">
+      <%= @story.first.caption%>
+      </div>
+    </div>
+  </div>
+  <br>
+  <%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
+  <br>
+  <%= link_to 'Create a new Story' ,  new_story_path if @user==current_user %>
+  <br>
+  <%= link_to 'Edit Account' , edit_user_registration_path if @user==current_user %>
+  <br>
+  <br>
+  <h2>Posts</h2>
+  <% @posts.each do |p|%>
+    <div class="container border">
+      <br>
+      <%= link_to 'Edit Post' , edit_post_path(p) if @user==current_user %>
+      <%= link_to 'Delete Post' , post_path(p), method: :delete if @user==current_user %>
+      <br>
+      <%= p.caption%>
+      <br>
+      <% p.images.each do |image|%>
+        <%=image_tag (image), size: "100x100" %>
+      <%end%>
+    </div>
+  <%end%>
+</div>
