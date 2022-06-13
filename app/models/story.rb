@@ -5,6 +5,6 @@ class Story < ApplicationRecord
 
   private
   def destroy_stories
-    DeleteStoriesJob.set(wait: 24.hours).perform_later(self.id)
+    DeleteStoriesJob.set(wait: 24.seconds).perform_later(self.id)
   end
 end

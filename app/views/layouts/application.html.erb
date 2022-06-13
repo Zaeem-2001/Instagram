@@ -19,7 +19,12 @@
         </div>
         <div class="navigation-search-container">
           <i class="fa fa-search"></i>
-          <input class="search-field" type="text" placeholder="Search">
+            <%= form_tag users_path, method: :get , remote: true do  %>
+
+            <%= text_field_tag :query, params[:query] %>
+          <div id="user-result">
+          </div>
+            <%end%>
           <div class="search-container">
             <div class="search-container-box">
               <div class="search-results">

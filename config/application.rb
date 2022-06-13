@@ -33,7 +33,7 @@ module Instagram
     config.generators.system_tests = nil
 
     #sidekiq
-      config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :sidekiq
 
 
   end
