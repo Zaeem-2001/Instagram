@@ -31,3 +31,7 @@ $(document).on("scroll", function () {
     $(".navigation").removeClass("shrink");
   }
 });
+
+$('.carousel').carousel({
+  interval: 2000
+})

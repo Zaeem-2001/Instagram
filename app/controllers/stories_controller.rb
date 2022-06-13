@@ -8,6 +8,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
+    render :layout => false
   end
 
   def create
