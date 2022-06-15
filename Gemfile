@@ -63,11 +63,12 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # devise
 gem 'devise'
 
-gem 'rubocop-rails', require: false
 
 
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+
+gem 'toastr-rails'
 
 
 gem 'activestorage'

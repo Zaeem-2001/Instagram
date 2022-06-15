@@ -10,11 +10,11 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+  *= require_toastr
 
  */
 
 @import 'bootstrap';
-
 
 // ----------------------------------------------------------------
 //Navabar
@@ -232,7 +232,7 @@ body {
   display: flex;
   background-color: #fff;
   box-shadow: 0 3px 24px -8px rgba(0, 0, 0, 0.3);
-  width: 640px;
+  width: 80%;
   margin: 0 auto;
   border-radius: 8px;
   padding: 20px 36px;
@@ -283,13 +283,184 @@ body {
 }
 
 
-  .carousel-item img
-    {
-      width: 70%;
-      margin: auto;
-      height: 100%;
+.carousel-item img {
+  width: 70%;
+  margin: auto;
+  height: 1000px
+}
+
+.story-user {
+  margin-left: 15%;
+
+  .story-user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
   }
 
+  p {
+    color: white;
+  }
+}
 
 
 /* footer end here*/
+.postData-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  margin-top: 5px;
+
+
+  .card {
+    position: relative;
+    width: 100%;
+    min-height: 800px;
+    background: #fff;
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+
+    .imgBx {
+      position: relative;
+      width: 100%;
+      height: 700px;
+      margin: 10px 0 15px;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .actionBtns {
+      display: flex;
+      // justify-content: space-between;
+      align-items: center;
+
+      img {
+        cursor: pointer;
+      }
+
+      .left {
+        img {
+          float: left;
+          margin-right: 8px;
+        }
+      }
+
+    }
+
+    .likes {
+      font-weight: 500;
+      margin-top: 5px;
+      font-size: 16px;
+      color: #4d4d4f;
+    }
+
+    .message {
+      font-weight: 400;
+      margin-top: 5px;
+      color: #777;
+      line-height: 1.5em;
+
+      b {
+        color: #262626;
+      }
+
+    }
+
+    .comments {
+      margin-top: 10px;
+      font-weight: 400;
+      color: #999
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+
+
+
+      .userDetails {
+        display: flex;
+        align-items: center;
+
+        h3 {
+          font-size: 18px;
+          color: #4d4d4f;
+          font-weight: 500;
+          line-height: 1em;
+        }
+
+        span {
+          font-size: 0.7em;
+        }
+
+        // .dot {
+        //   // img {
+        //   //   transform: scale(0.6);
+        //   //   cursor: pointer;
+        //   // }
+        // }
+
+        .profile_img {
+          position: relative;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 8px;
+
+          .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+
+    }
+
+
+  }
+}
+
+
+
+.post-container {
+  padding-left: 10%;
+  padding-right: 10%;
+
+  .comment-container {
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding-top: 10px;
+  }
+
+  .text {
+    width: 100%;
+    // border: none;
+    outline: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: #262626
+  }
+}
+
+//follow
+
+.follow-btn{
+  margin-top:10px;
+  width:220px;
+}

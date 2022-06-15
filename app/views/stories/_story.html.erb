@@ -1,14 +1,17 @@
 
 
-
 <div class="stories-container">
-  <%= story.each do |s| %>
-
+    <% story.each do |s| %>
+    <%= link_to story_path(s) do%>
+      <div class="content">
+        <%= image_tag (s.image)  if s.image.attached? %>
+      </div>
+    <% end %>
+    <%end%>
     <div class="content">
-
-      <%= image_tag (s.image)  if s.image.attached? %>
-
+    <%= link_to  new_story_path do %>
+      <%= image_tag('plus.png')%>
+    <%end%>
     </div>
+</div>
 
-  <%end%>
-  </div>

@@ -1,7 +1,6 @@
 class StoriesController < ApplicationController
-  def index
-  end
 
+  skip_before_action :verify_authenticity_token , only: :destroy
   def new
     @story = current_user.stories.build
   end
@@ -14,7 +13,7 @@ class StoriesController < ApplicationController
   def create
     @story = current_user.stories.build(stories_params)
     if @story.save
-      redirect_to @story
+      redirect_to current_user
     else
       render 'new'
     end
@@ -23,7 +22,8 @@ class StoriesController < ApplicationController
   def destroy
     @story = Story.find(params[:id])
     if @story.destroy
-      redirect_to @story
+      flash[:notice] = "Story was successfully destroyed"
+      redirect_to current_user
     else
       redirect_to @story
       flash[:notice] = "Something went wrong"

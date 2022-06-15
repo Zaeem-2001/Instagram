@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
   has_many :followers, through: :following_users
 
+  private
+
   def self.search(query)
     if query
       User.where('full_name like ?', "%#{query}%")

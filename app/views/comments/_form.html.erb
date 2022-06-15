@@ -1,8 +1,7 @@
 <%= form_with  model:[ @post ,  @post.comments.build ], remote: true do |form| %>
 
   <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
+    <%= form.text_area :body , class: 'text' , placeholder: 'Add a Comment ...'%>
   </p>
 
   <p>

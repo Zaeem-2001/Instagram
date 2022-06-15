@@ -4,10 +4,23 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 
-<%# <%= render 'stories/story' , story: @story%>
 <div style="background-color: black;">
 <div  class="carousel slide" data-ride="carousel" data-interval="5000">
   <div class="carousel-inner">
+    <div class="row story-user">
+      <div class="col-2 ">
+         <%=image_tag (@story.user.image), class: 'story-user-image round'  %>
+      </div>
+      <div class="col-8" >
+        <p> <%=@story.user.username%><br>
+         <%=time_ago_in_words(@story.created_at) + ' ago'%> </p>
+        <%= link_to 'Delete story' , @story, method: :delete ,class: 'btn btn-danger' if @story.user_id == current_user.id %>
+        <%= link_to 'Back', :back , class:'btn btn-dark' %>
+           </div>
+      </div>
+      <div class="col-2">
+    </div>
+
     <div class="carousel-item active" style="width:70%;margin:auto;">
       <%= image_tag (@story.image) , class: 'd-block w-100' %>
     </div>
