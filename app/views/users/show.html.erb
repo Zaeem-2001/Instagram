@@ -17,7 +17,7 @@
       <div class="row user-username">
         <span><%= @user.full_name%></span>
       </div>
-      <%=  render 'follow' %>
+      <%=  render 'follow' if @user.publicAccount? || current_user.followees.exists?(@user.id) %>
     </div>
   </div>
   <section class="" style="margin-top:5%">
@@ -32,7 +32,7 @@
   <h2 style="text-align:center">Posts</h2>
   <% @user.posts.each do |post|%>
   <%= link_to post_path(post) do%>
-    <div class="post-container postData-container ">
+    <div class="post-container postData-container">
       <%= render 'posts/post' , post: post%>
     </div>
   <%end%>
