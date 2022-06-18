@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :stories , only: %i[ new create show destroy ]
   resources :posts do
-    resources :comments , only: %i[create update destroy]
+    resources :comments , only: %i[edit create update destroy]
     resources :likes , only: %i[create destroy]
   end
   devise_scope :user do

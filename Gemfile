@@ -74,3 +74,5 @@ gem 'toastr-rails'
 gem 'activestorage'
 
 gem 'sidekiq'
+
+gem "pundit", "~> 2.2"
