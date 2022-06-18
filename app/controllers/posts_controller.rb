@@ -1,16 +1,15 @@
-class PostsController < ApplicationController
+# frozen_string_literal: true
 
+class PostsController < ApplicationController
   def index
-    @posts=Post.all
+    @posts = Post.all
   end
 
   def new
     @post = current_user.posts.build
   end
 
-
   def create
-
     @post = current_user.posts.build(posts_params)
     # @post.images.attach(params[:images])
 
@@ -42,18 +41,16 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    redirect_to @post
     if @post.destroy
-      redirect_to @post
     else
-      redirect_to @post
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = 'Something went wrong'
     end
   end
 
   private
 
   def posts_params
-    params.require(:post).permit(:caption,images: [])
+    params.require(:post).permit(:caption, images: [])
   end
-
 end

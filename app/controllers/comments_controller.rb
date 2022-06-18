@@ -6,23 +6,19 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_back(fallback_location: root_path)
     else
-      flash[:alert] = "Something went wrong"
+      flash[:alert] = 'Something went wrong'
     end
   end
 
-  def update
-
-  end
+  def update; end
 
   def destroy
     @comment = @post.comments.find(params[:id])
-    if @comment.destroy
-    redirect_to @post
-    end
-
+    redirect_to @post if @comment.destroy
   end
 
   private
+
   def comments_params
     params.require(:comment).permit(:body).merge(user_id: current_user.id, post_id: @post.id)
   end

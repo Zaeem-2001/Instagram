@@ -60,9 +60,7 @@ gem 'devise'
 
 gem 'rubocop-rails', require: false
 
-
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
-
 
 gem 'activestorage'
