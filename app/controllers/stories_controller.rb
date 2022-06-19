@@ -15,12 +15,14 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to current_user
     else
+      flash[:notice] = "Something went wrong"
       render 'new'
     end
   end
 
   def destroy
     @story = Story.find(params[:id])
+    authorize(@story.user)
     if @story.destroy
       flash[:notice] = "Story was successfully destroyed"
       redirect_to current_user
@@ -32,7 +34,7 @@ class StoriesController < ApplicationController
 
   private
   def stories_params
-    params.require(:story).permit(:caption,:image)
+    params.require(:story).permit(:image)
   end
 
 end

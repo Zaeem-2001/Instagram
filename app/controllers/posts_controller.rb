@@ -10,9 +10,8 @@ class PostsController < ApplicationController
 
 
   def create
-
     @post = current_user.posts.build(posts_params)
-    if @post.save
+    if @post.save!
       redirect_to @post
     else
       render 'new'
@@ -22,6 +21,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.all.order('created_at DESC')
+    authorize(@post.user)
   end
 
   def edit
@@ -30,18 +30,21 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
+    authorize(@post.user)
     if @post.update(posts_params)
+      flash[:notice] = "Post updated successfully"
       redirect_to @post
     else
+      flash[:notice] = "Something went wrong"
       render 'edit'
     end
   end
 
   def destroy
     @post = Post.find(params[:id])
-    if @post.destroy
-      redirect_to @post
+    authorize(@post.user)
+    if @post.destroy!
+      redirect_to current_user
     else
       redirect_to @post
       flash[:notice] = "Something went wrong"

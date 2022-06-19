@@ -1,42 +1,40 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
-
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <div style="background-color: black;">
-<div  class="carousel slide" data-ride="carousel" data-interval="5000">
-  <div class="carousel-inner">
-    <div class="row story-user">
-      <div class="col-2 ">
-         <%=image_tag (@story.user.image), class: 'story-user-image round'  %>
-      </div>
-      <div class="col-8" >
-        <p> <%=@story.user.username%><br>
-         <%=time_ago_in_words(@story.created_at) + ' ago'%> </p>
-        <%= link_to 'Delete story' , @story, method: :delete ,class: 'btn btn-danger' if @story.user_id == current_user.id %>
-        <%= link_to 'Back', :back , class:'btn btn-dark' %>
-           </div>
+  <div  class="carousel slide" data-ride="carousel" data-interval="5000">
+    <div class="carousel-inner">
+      <div class="row story-user">
+        <div class="col-2 ">
+          <%=image_tag (@story.user.image), class: 'story-user-image round'  %>
+        </div>
+        <div class="col-8" >
+          <p> <%=@story.user.username%><br>
+            <%=time_ago_in_words(@story.created_at) + ' ago'%> </p>
+          <% if policy(@story.user).destroy? %>
+            <%= link_to 'Delete story' , @story, method: :delete ,class: 'btn btn-danger' %>
+          <% end %>
+          <%= link_to 'Back', root_path , class:'btn btn-dark' %>
+        </div>
       </div>
       <div class="col-2">
+      </div>
+      <div class="carousel-item active" style="width:70%;margin:auto;">
+        <%= image_tag (@story.image) , class: 'd-block w-100' %>
+      </div>
     </div>
-
-    <div class="carousel-item active" style="width:70%;margin:auto;">
-      <%= image_tag (@story.image) , class: 'd-block w-100' %>
-    </div>
-
+    <% if Story.prev_story?(@story.id) == true %>
+      <%= link_to Story.where("id < ?", @story.id).last , class: 'carousel-control-prev' do %>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      <% end %>
+    <%end%>
+    <% if Story.next_story?(@story.id) == true %>
+      <%= link_to  Story.next_story(@story.id) , class: 'carousel-control-next' do %>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      <% end %>
+    <% end %>
   </div>
-
-  <%= link_to Story.where("id < ?", @story.id).last , class: 'carousel-control-prev' do %>
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  <% end %>
-
-  <%= link_to Story.where("id > ?", @story.id).first , class: 'carousel-control-next' do %>
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  <% end %>
-
-</div>
-
 </div>

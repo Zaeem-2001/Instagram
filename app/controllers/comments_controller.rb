@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_post, only: %i[create destroy]
+  before_action :set_post, only: %i[edit update create destroy]
 
   def create
     @comment = Comment.new(comments_params)
@@ -10,12 +10,23 @@ class CommentsController < ApplicationController
     end
   end
 
-  def update
+  def edit
+    @comment=@post.comments.find(params[:id])
+  end
 
+  def update
+    @comment=@post.comments.find(params[:id])
+    if @comment.update(comments_params)
+      flash[:alert] = "Comment updated successfully"
+      redirect_to @post
+    else
+      flash[:alert] = "Something went wrong"
+    end
   end
 
   def destroy
     @comment = @post.comments.find(params[:id])
+    authorize(@comment)
     if @comment.destroy
     redirect_to @post
     end

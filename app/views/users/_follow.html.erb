@@ -1,6 +1,6 @@
  <div class="container row">
 
-    <% if @user.id != current_user.id %>
+    <% if !own_account(@user) %>
     <% if current_user.followees.include?(@user) %>
         <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST" , class: 'btn btn-danger follow-btn' %></h5>
     <% else %>
