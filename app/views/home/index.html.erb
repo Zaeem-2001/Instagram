@@ -1,5 +1,7 @@
 
 <h2><%= @user.full_name %></h2>
 <h3><%= @user.username %></h3>
-<%= link_to "Log in", new_user_session_path %>
-<%= link_to "Logout",  destroy_user_session_path , method: :delete %>
+<br>
+<%= link_to "Profile" ,user_path(@user) , class:'btn btn-primary' %>
+<%= link_to "Log in", new_user_session_path , class:'btn btn-success' %>
+<%= link_to "Logout",  destroy_user_session_path , method: :delete , class:'btn btn-danger' %>

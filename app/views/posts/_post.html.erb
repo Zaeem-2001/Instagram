@@ -1,19 +1,30 @@
 <div class="container border">
-<%= @post.full_name %></h3>
+<%= post.full_name %></h3>
 <br>
-<span><%= @post.username%></span>
+<span><%= post.username%></span>
 <br>
-<%=  time_ago_in_words(@post.created_at) + ' ago'%>
+<%=  time_ago_in_words(post.created_at) + ' ago'%>
 <br>
-<h3><%= @post.caption%></h3>
+<h3><%= post.caption%></h3>
 <br>
 
-<% @post.images.each do |image|%>
+<% post.images.each do |image|%>
   <%=image_tag (image), size: "200x200" %>
 <%end%>
+
+<p><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'like' : 'likes' %>
+</p>
+<% pre_like = post.likes.find {|like| like.user_id == current_user.id } %>
+
+<% if pre_like %>
+<%= button_to 'Unlike' , post_like_path(post, pre_like) , method: :delete %>
+<% else %>
+<%= button_to 'like' , post_likes_path(post) ,method: :post %>
+<% end %>
+
 <div class="container border">
 <h2>Comments</h2>
-<%= render partial: 'comments/comment' %>
+<%= render partial: 'comments/comment' , comments: @comments %>
 </div>
 <div class="container border">
 <%= render 'comments/form' %>
