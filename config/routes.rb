@@ -2,13 +2,14 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  
+
   resources :users, only: %i[index show]
 
-  resources :posts
-  devise_scope :user do
-    # root to: 'devise/registrations#new'
+  resources :posts do
+    resources :comments , only: %i[create update destroy]
 
+  end
+  devise_scope :user do
     root to: 'home#index'
   end
 end

@@ -1,8 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @user=current_user
-    @posts=@user.posts.all
+    @posts=Post.all
   end
 
   def new
@@ -13,6 +12,7 @@ class PostsController < ApplicationController
   def create
 
     @post = current_user.posts.build(posts_params)
+    # @post.images.attach(params[:images])
 
     if @post.save
       redirect_to @post
@@ -22,8 +22,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @user = current_user
     @post = Post.find(params[:id])
+    @comments = @post.comments.all.order('created_at DESC')
   end
 
   def edit
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   private
 
   def posts_params
-    params.require(:post).permit(:caption)
+    params.require(:post).permit(:caption,images: [])
   end
 
 end

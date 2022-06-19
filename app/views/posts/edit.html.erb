@@ -1,1 +1,15 @@
-<%= render 'form'%>
+<%= form_with model: @post, local: true do |f| %>
+
+<div class="field">
+    <%= f.label :caption %><br />
+    <%= f.text_area  :caption , autofocus: true, autocomplete: "caption" %>
+</div>
+
+ <% @post.images.each do |image|%>
+  <%=image_tag (image), size: "100x100" %>
+  <%end%>
+
+<div class="actions">
+    <%= f.submit  %>
+  </div>
+<%end%>
