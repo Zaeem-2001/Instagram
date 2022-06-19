@@ -19,39 +19,23 @@
       </div>
     </div>
   </div>
+
   <% @story=@user.stories.all%>
   <div class="stories-container">
-
     <% @story.each do |s| %>
+    <%= link_to story_path(s) do%>
       <div class="content">
         <%= image_tag (s.image)  if s.image.attached? %>
       </div>
+    <% end %>
     <%end%>
-
-  </div>
-  <div class="stories-full">
     <div class="content">
-      <div class="close-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </div>
-      <div class="left-arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-      </div>
-      <%= image_tag (@story.first.image)  if @story.first.image.attached? %>
-      <div class="right-arrow">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </div>
-      <div class="title">
-      <%= @story.first.caption%>
-      </div>
+    <%= link_to  new_story_path do %>
+      <%= image_tag('plus.png')%>
+    <%end%>
     </div>
   </div>
+
   <br>
   <%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
   <br>
