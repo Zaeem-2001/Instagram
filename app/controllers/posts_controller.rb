@@ -12,8 +12,6 @@ class PostsController < ApplicationController
   def create
 
     @post = current_user.posts.build(posts_params)
-    # @post.images.attach(params[:images])
-
     if @post.save
       redirect_to @post
     else

@@ -4,8 +4,22 @@
 <br>
 @<%= @user.username%>
 
+<%# Stories %>
+<div>
+<p>Stories</p>
+<% @story=@user.stories.all%>
+<% @story.each do |story| %>
+<%= render 'stories/story' , story: story%>
+<% end%>
+</div>
+
+
+
+
 <br>
 <%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
+<br>
+<%= link_to 'Create a new Story' ,  new_story_path if @user==current_user %>
 <br>
 <%= link_to 'Edit Account' , edit_user_registration_path if @user==current_user %>
 

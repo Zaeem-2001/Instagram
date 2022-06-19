@@ -12,15 +12,7 @@
   <%=image_tag (image), size: "200x200" %>
 <%end%>
 
-<p><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'like' : 'likes' %>
-</p>
-<% pre_like = post.likes.find {|like| like.user_id == current_user.id } %>
-
-<% if pre_like %>
-<%= button_to 'Unlike' , post_like_path(post, pre_like) , method: :delete %>
-<% else %>
-<%= button_to 'like' , post_likes_path(post) ,method: :post %>
-<% end %>
+<%= render "likes/like" , post: post %>
 
 <div class="container border">
 <h2>Comments</h2>

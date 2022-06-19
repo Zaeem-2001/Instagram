@@ -1,0 +1,8 @@
+<h1>Stories</h1>
+<div>
+<p>Story</p>
+<%= link_to 'Delete story' , story_path(story), method: :delete if story.user_id == current_user.id %>
+<br>
+<%=image_tag (story.image) , size: "200x300" if story.image.attached? %><br>
+<%= story.caption%>
+</div>
