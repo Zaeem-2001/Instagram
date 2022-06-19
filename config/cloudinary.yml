@@ -1,0 +1,18 @@
+development:
+  cloud_name: instagramclone694
+  api_key: '598237123665265'
+  api_secret: "OQRg0KkEOvg0z3EY3Otlt64vnz8"
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: instagramclone694
+  api_key: '598237123665265'
+  api_secret: "OQRg0KkEOvg0z3EY3Otlt64vnz8"
+  enhance_image_tag: true
+  static_file_support: false
+test:
+  cloud_name: instagramclone694
+  api_key: '598237123665265'
+  api_secret: "OQRg0KkEOvg0z3EY3Otlt64vnz8"
+  enhance_image_tag: true
+  static_file_support: false

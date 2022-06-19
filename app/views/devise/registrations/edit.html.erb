@@ -15,6 +15,16 @@
     <%= f.text_field :full_name, autofocus: true, autocomplete: "Full_name" %>
   </div>
 
+  <div class="field">
+    <%= f.label :isPrivate %><br />
+
+    <%= f.label :isPrivate, "Yes"  %>
+    <%= f.radio_button :isPrivate, :privateAccount %>
+        <br>
+    <%= f.label :isPrivate, "No" %>
+    <%= f.radio_button :isPrivate, :publicAccount, :checked => true %>
+  </div>
+
 
   <div class="field">
     <%= f.label :email %><br />

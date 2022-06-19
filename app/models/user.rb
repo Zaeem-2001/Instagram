@@ -3,6 +3,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  validates :full_name, :username, :email, presence: true
+  validates :email,:username , uniqueness: true
+  validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -27,7 +32,7 @@ class User < ApplicationRecord
 
   def self.search(query)
     if query
-      User.where('full_name like ?', "%#{query}%")
+      User.where('lower(full_name) like ?', "%#{query.downcase}%")
     else
       nil
     end

@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  validates :images, attached: true, content_type:  ['image/png', 'image/jpeg']
+  validates :images, limit: { min: 1, max: 10 }
   belongs_to :user
   has_many_attached :images
 

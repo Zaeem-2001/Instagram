@@ -18,4 +18,8 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     @user.id == @creater_user.id
   end
+
+  def show?
+    @user.id == @creater_user.id || @creater_user.followees.exists?(user.id)
+  end
 end

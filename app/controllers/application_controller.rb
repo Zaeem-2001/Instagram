@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
   protected
 
   def configure_permitted_parameters
@@ -20,6 +21,14 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
+    redirect_back(fallback_location: root_path)
+  end
+  def record_not_found
+    flash[:alert] = "Record not found"
+    redirect_back(fallback_location: root_path)
+  end
+  def record_invalid(error)
+    flash[:alert] = error.message
     redirect_back(fallback_location: root_path)
   end
 end
