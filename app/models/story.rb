@@ -3,6 +3,8 @@ class Story < ApplicationRecord
   has_one_attached :image
   belongs_to :user
 
+  scope :folowing_stories , -> (follower_id) { where(user_id: follower_id ) }
+
   private
   def destroy_stories
     DeleteStoriesJob.set(wait: 24.hours).perform_later(self.id)

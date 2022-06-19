@@ -1,1 +1,10 @@
-<%= render 'post',  post: @post %>
+<div class="post-container row">
+  <div class="postData-container col-8">
+  <%= render 'post',  post: @post %>
+  </div>
+  <div class="comment-container col-4">
+
+    <%= render 'comments/form' %>
+    <%= render partial: 'comments/comment' , :locals => { :comments => @comments } %>
+  </div>
+</div>

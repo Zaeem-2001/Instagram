@@ -1,13 +1,13 @@
 <%= form_with model: @post, remote: true do |f| %>
 
-<div class="field">
+<div class="form-group">
     <%= f.label :caption %><br />
-    <%= f.text_area  :caption , autofocus: true, autocomplete: "caption" %>
+    <%= f.text_area  :caption , autofocus: true, autocomplete: "caption"  %>
 </div>
 
-<div class="field">
+<div class="form-group">
     <%= f.label :images %><br />
-    <%= f.file_field :images , accept:'image/*',multiple: true,autofocus: true, autocomplete: "image" %>
+    <%= f.file_field :images , accept:'image/*',multiple: true,autofocus: true %>
   </div>
 
 <div class="actions">

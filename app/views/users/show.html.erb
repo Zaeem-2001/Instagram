@@ -10,52 +10,31 @@
       <div class="row user-username">
         <ul >
           <li><%= @user.posts.count%> <%= (@user.posts.count) == 1 ? 'Post' : 'Posts' %></li>
-          <li>followers</li>
-          <li>following</li>
+          <li><%= @user.followers.count%> <%= (@user.followers.count) == 1 ? 'Follower' : 'Followers' %></li>
+          <li><%= @user.followees.count%> Following </li>
         </ul>
       </div>
       <div class="row user-username">
         <span><%= @user.full_name%></span>
       </div>
+      <%=  render 'follow' %>
     </div>
   </div>
-
-  <% @story=@user.stories.all%>
-  <div class="stories-container">
-    <% @story.each do |s| %>
-    <%= link_to story_path(s) do%>
-      <div class="content">
-        <%= image_tag (s.image)  if s.image.attached? %>
-      </div>
-    <% end %>
-    <%end%>
-    <div class="content">
-    <%= link_to  new_story_path do %>
-      <%= image_tag('plus.png')%>
-    <%end%>
-    </div>
+  <section class="" style="margin-top:5%">
+    <% story=@user.stories.all%>
+    <%= render 'stories/story' , story: story%>
+  </section>
+  <div class="container">
+    <%= link_to 'Create a new Post' , new_post_path ,class:'btn btn-primary' if @user==current_user %>
+    <%= link_to 'Create a new Story' ,  new_story_path , class:'btn btn-success' if @user==current_user %>
   </div>
-
-  <br>
-  <%= link_to 'Create a new Post' , new_post_path if @user==current_user %>
-  <br>
-  <%= link_to 'Create a new Story' ,  new_story_path if @user==current_user %>
-  <br>
-  <%= link_to 'Edit Account' , edit_user_registration_path if @user==current_user %>
-  <br>
-  <br>
-  <h2>Posts</h2>
-  <% @posts.each do |p|%>
-    <div class="container border">
-      <br>
-      <%= link_to 'Edit Post' , edit_post_path(p) if @user==current_user %>
-      <%= link_to 'Delete Post' , post_path(p), method: :delete if @user==current_user %>
-      <br>
-      <%= p.caption%>
-      <br>
-      <% p.images.each do |image|%>
-        <%=image_tag (image), size: "100x100" %>
-      <%end%>
+  <hr>
+  <h2 style="text-align:center">Posts</h2>
+  <% @user.posts.each do |post|%>
+  <%= link_to post_path(post) do%>
+    <div class="post-container postData-container ">
+      <%= render 'posts/post' , post: post%>
     </div>
   <%end%>
+<%end%>
 </div>

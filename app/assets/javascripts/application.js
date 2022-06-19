@@ -17,11 +17,24 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require toastr
 
 
-// double click on the heart icon
-$(".fa-heart").dblclick(function () {
-  $(".notification-bubble").show(400);
+$(document).ready(function() {
+  toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "positionClass": "toast-top-right",
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+  }
 });
 
 $(document).on("scroll", function () {

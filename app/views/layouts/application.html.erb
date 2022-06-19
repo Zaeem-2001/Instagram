@@ -19,7 +19,12 @@
         </div>
         <div class="navigation-search-container">
           <i class="fa fa-search"></i>
-          <input class="search-field" type="text" placeholder="Search">
+            <%= form_tag users_path, method: :get , remote: true do  %>
+
+            <%= text_field_tag :query, params[:query] %>
+          <div id="user-result">
+          </div>
+            <%end%>
           <div class="search-container">
             <div class="search-container-box">
               <div class="search-results">
@@ -48,8 +53,14 @@
     <br>
     <br>
     <br>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+   <% unless flash.empty? %>
+    <script type="text/javascript">
+        <% flash.each do |f| %>
+        <% type = f[0].to_s %>
+        toastr['<%= type %>']('<%= f[1] %>');
+        <% end %>
+    </script>
+<% end %>
     <%= yield %>
     <div class="footer-basic">
       <footer>
