@@ -32,9 +32,7 @@ module Instagram
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    #sidekiq
+    # sidekiq
     config.active_job.queue_adapter = :sidekiq
-
-
   end
 end

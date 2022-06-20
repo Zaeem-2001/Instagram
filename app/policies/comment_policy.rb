@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
@@ -12,6 +14,6 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.id==@comment.user_id || @user==@comment.post.user
+    @user.id == @comment.user_id || @user == @comment.post.user
   end
 end

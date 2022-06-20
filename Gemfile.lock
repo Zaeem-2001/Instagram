@@ -187,8 +187,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.18.0)
       parser (>= 3.1.1.0)
-    rubocop-minitest (0.20.0)
-      rubocop (>= 0.90, < 2.0)
     rubocop-performance (1.14.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
@@ -196,6 +194,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
+    rubocop-rspec (2.11.1)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby_dep (1.5.0)
     sass (3.7.4)
@@ -271,9 +271,9 @@ DEPENDENCIES
   pundit (~> 2.2)
   rails (~> 5.2.8)
   rubocop
-  rubocop-minitest
   rubocop-performance
   rubocop-rails
+  rubocop-rspec
   sass-rails (~> 5.0)
   sidekiq
   spring

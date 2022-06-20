@@ -1,13 +1,13 @@
-class PostsController < ApplicationController
+# frozen_string_literal: true
 
+class PostsController < ApplicationController
   def index
-    @posts=Post.all
+    @posts = Post.all
   end
 
   def new
     @post = current_user.posts.build
   end
-
 
   def create
     @post = current_user.posts.build(posts_params)
@@ -32,10 +32,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     authorize(@post.user)
     if @post.update(posts_params)
-      flash[:notice] = "Post updated successfully"
+      flash[:notice] = 'Post updated successfully'
       redirect_to @post
     else
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = 'Something went wrong'
       render 'edit'
     end
   end
@@ -47,14 +47,13 @@ class PostsController < ApplicationController
       redirect_to current_user
     else
       redirect_to @post
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = 'Something went wrong'
     end
   end
 
   private
 
   def posts_params
-    params.require(:post).permit(:caption,images: [])
+    params.require(:post).permit(:caption, images: [])
   end
-
 end
