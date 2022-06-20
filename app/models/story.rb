@@ -7,7 +7,7 @@ class Story < ApplicationRecord
   has_one_attached :image
   belongs_to :user
 
-  scope :folowing_stories, ->(follower_id) { where(user_id: follower_id) }
+  scope :folowing_stories, ->(follower_id) { where(user_id: follower_id).order('created_at ASC') }
 
   private
 
