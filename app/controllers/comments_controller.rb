@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = @post.comments.find(params[:id])
+    authorize(@comment)
     if @comment.update(comments_params)
       flash[:alert] = 'Comment updated successfully'
       redirect_to @post
