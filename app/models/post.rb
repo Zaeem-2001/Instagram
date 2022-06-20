@@ -7,4 +7,6 @@ class Post < ApplicationRecord
   has_many :comments , dependent: :destroy
   has_many :likes , dependent: :destroy
   delegate :full_name, :username, to: :user
+
+  scope :following_posts , -> (follower_id) { where(user_id: follower_id ) }
 end
