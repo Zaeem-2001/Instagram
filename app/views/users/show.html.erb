@@ -24,10 +24,7 @@
       <%=  render 'follow'  %>
     </div>
   </div>
-  <section class="" style="margin-top:5%">
-    <% story=@user.stories.all%>
-    <%= render 'stories/story' , story: story%>
-  </section>
+
   <div class="container">
     <%= link_to 'Create a new Post' , new_post_path ,class:'btn btn-primary' if own_account(@user) %>
     <%= link_to 'Create a new Story' ,  new_story_path , class:'btn btn-success' if own_account(@user) %>

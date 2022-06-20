@@ -9,11 +9,7 @@ class Story < ApplicationRecord
 
   private
 
-  scope :next_story, ->(current_story) { where("id > ?", current_story).first }
-
-  scope :next_story?, ->(current_story) { where("id > ?", current_story).present? }
-
-  scope :prev_story?, ->(current_story) { where("id < ?", current_story).present? }
+  
 
 
   def destroy_stories

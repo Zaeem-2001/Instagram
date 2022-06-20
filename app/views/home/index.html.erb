@@ -1,7 +1,6 @@
-<%following=current_user.followees.select(:id)%>
 <% story=Story.folowing_stories(following)%>
 <%= render 'stories/story' , story: story%>
-<% posts=Post.where(user_id: following)%>
+<% posts=Post.following_posts(following)%>
 <% posts.each do |post|%>
   <%= link_to post_path(post) do%>
     <div class="post-container postData-container ">

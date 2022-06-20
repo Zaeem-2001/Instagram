@@ -24,14 +24,14 @@
         <%= image_tag (@story.image) , class: 'd-block w-100' %>
       </div>
     </div>
-    <% if Story.prev_story?(@story.id) == true %>
-      <%= link_to Story.where("id < ?", @story.id).last , class: 'carousel-control-prev' do %>
+    <% if prev_story?(@story.id) %>
+      <%= link_to prev_story(@story.id) , class: 'carousel-control-prev' do %>
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       <% end %>
     <%end%>
-    <% if Story.next_story?(@story.id) == true %>
-      <%= link_to  Story.next_story(@story.id) , class: 'carousel-control-next' do %>
+    <% if next_story?(@story.id) %>
+      <%= link_to  next_story(@story.id) , class: 'carousel-control-next' do %>
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       <% end %>
