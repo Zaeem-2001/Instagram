@@ -8,15 +8,15 @@
         <h2><%= @user.username%> <%= link_to 'Edit Profile' , edit_user_registration_path, class: 'btn btn-light border' if own_account(@user) %></h2>
       </div>
       <%if show?(@user)%>
-      <div class="row user-username">
-        <ul >
-          <li><%= @user.posts.count%> <%= (@user.posts.count) == 1 ? 'Post' : 'Posts' %></li>
-          <li><%= @user.followers.count%> <%= (@user.followers.count) == 1 ? 'Follower' : 'Followers' %></li>
-          <li><%= @user.followees.count%> Following </li>
-        </ul>
-      </div>
+        <div class="row user-username">
+          <ul >
+            <li><%= @user.posts.count%> <%= (@user.posts.count) == 1 ? 'Post' : 'Posts' %></li>
+            <li><%= @user.followers.count%> <%= (@user.followers.count) == 1 ? 'Follower' : 'Followers' %></li>
+            <li><%= @user.followees.count%> Following </li>
+          </ul>
+        </div>
       <%else%>
-      <h3>Private Account</h3>
+        <h3>Private Account</h3>
       <%end%>
       <div class="row user-username">
         <span><%= @user.full_name%></span>
@@ -24,7 +24,13 @@
       <%=  render 'follow'  %>
     </div>
   </div>
-
+  <%if own_account(@user)%>
+    <section class="" style="margin-top:5%">
+      <% story=@user.stories.all%>
+      <%= render 'stories/story' , story: story%>
+    </section>
+  <%end%>
+  <br>
   <div class="container">
     <%= link_to 'Create a new Post' , new_post_path ,class:'btn btn-primary' if own_account(@user) %>
     <%= link_to 'Create a new Story' ,  new_story_path , class:'btn btn-success' if own_account(@user) %>
@@ -32,14 +38,14 @@
   <hr>
   <h2 style="text-align:center">Posts</h2>
   <%if show?(@user)%>
-  <% @user.posts.each do |post|%>
-  <%= link_to post_path(post) do%>
-    <div class="post-container postData-container">
-      <%= render 'posts/post' , post: post%>
-    </div>
+    <% @user.posts.each do |post|%>
+      <%= link_to post_path(post) do%>
+        <div class="post-container postData-container">
+          <%= render 'posts/post' , post: post%>
+        </div>
+      <%end%>
+    <%end%>
+  <%else%>
+    <h3>Private Account</h3>
   <%end%>
-<%end%>
-<%else%>
-<h3>Private Account</h3>
-<%end%>
 </div>
