@@ -45,7 +45,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
-  gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
+  gem 'rubocop-rspec' # or gem 'rubocop-rspec' depending on your test suite
 end
 
 group :development do
@@ -63,19 +63,16 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # devise
 gem 'devise'
 
-
-
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 
 gem 'toastr-rails'
 
-
 gem 'activestorage'
 
 gem 'sidekiq'
 
-gem "pundit", "~> 2.2"
+gem 'pundit', '~> 2.2'
 
 gem 'active_storage_validations'
 

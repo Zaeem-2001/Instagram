@@ -1,13 +1,14 @@
-class StoriesController < ApplicationController
+# frozen_string_literal: true
 
-  skip_before_action :verify_authenticity_token , only: :destroy
+class StoriesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :destroy
   def new
     @story = current_user.stories.build
   end
 
   def show
     @story = Story.find(params[:id])
-    render :layout => false
+    render layout: false
   end
 
   def create
@@ -15,7 +16,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to current_user
     else
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = 'Something went wrong'
       render 'new'
     end
   end
@@ -24,17 +25,17 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     authorize(@story.user)
     if @story.destroy
-      flash[:notice] = "Story was successfully destroyed"
+      flash[:notice] = 'Story was successfully destroyed'
       redirect_to current_user
     else
       redirect_to @story
-      flash[:notice] = "Something went wrong"
+      flash[:notice] = 'Something went wrong'
     end
   end
 
   private
+
   def stories_params
     params.require(:story).permit(:image)
   end
-
 end

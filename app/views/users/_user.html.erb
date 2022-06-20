@@ -2,7 +2,7 @@
   <% users.each do |user|%>
     <%= link_to user_path(user) do%>
       <%= user.full_name%>
-    <%end%>
+    <%end%> |
   <%end%>
 <%else%>
 <h2>No results found</h2>

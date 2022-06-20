@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < ApplicationController
   before_action :find_post
   before_action :already_liked?
@@ -7,19 +9,18 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like=@post.likes.find(params[:id])
+    @like = @post.likes.find(params[:id])
     @like.destroy!
     redirect_back(fallback_location: root_path)
   end
+
   private
 
   def find_post
-    @post= Post.find( params[:post_id])
+    @post = Post.find(params[:post_id])
   end
 
   def already_liked?
-    Like.where(user_id: current_user.id , post_id: Post.find(params[:post_id])).exists?
+    Like.where(user_id: current_user.id, post_id: Post.find(params[:post_id])).exists?
   end
-
-
 end

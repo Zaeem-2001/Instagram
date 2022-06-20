@@ -19,7 +19,7 @@
   <div class="imgBx">
     <ol class="carousel-indicators">
       <% post.images.each_with_index do |slide, i| %>
-        <li data-target="#mycarousel" data-slide-to=<%="#{i}"%> class="<%='active' if i==0 %>"></li>
+        <li data-target="#mycarousel" data-slide-to="<%=i%>" class="<%='active' if i==0 %>"></li>
       <% end %>
     </ol>
     <div class="carousel slide" data-ride="carousel" data-interval="2000">
