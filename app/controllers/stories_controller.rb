@@ -14,10 +14,10 @@ class StoriesController < ApplicationController
   def create
     @story = current_user.stories.build(stories_params)
     if @story.save
-      redirect_to current_user
+      redirect_to user_path(current_user)
     else
-      flash[:notice] = 'Something went wrong'
-      render 'new'
+      redirect_to new_story_path
+      flash[:errors] = @story.errors.full_messages
     end
   end
 

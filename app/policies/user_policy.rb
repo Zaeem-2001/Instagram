@@ -21,6 +21,10 @@ class UserPolicy < ApplicationPolicy
     @user.id == @creater_user.id
   end
 
+  def edit?
+    @user.id == @creater_user.id
+  end
+
   def show?
     @user.id == @creater_user.id || @creater_user.followees.where(user_id: @user.id)
   end

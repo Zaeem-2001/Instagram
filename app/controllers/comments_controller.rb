@@ -8,28 +8,31 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_back(fallback_location: root_path)
     else
-      flash[:alert] = 'Something went wrong'
+      redirect_to post_path(@post)
+      flash[:error] = @comment.errors.full_messages
     end
   end
 
   def edit
     @comment = @post.comments.find(params[:id])
+    authorize(@comment.user)
   end
 
   def update
     @comment = @post.comments.find(params[:id])
-    authorize(@comment)
+    authorize(@comment.user)
     if @comment.update(comments_params)
       flash[:alert] = 'Comment updated successfully'
-      redirect_to @post
+      redirect_to post_path(@post)
     else
-      flash[:alert] = 'Something went wrong'
+      redirect_to edit_post_comment_path(@post,@comment)
+      flash[:error] = @comment.errors.full_messages
     end
   end
 
   def destroy
     @comment = @post.comments.find(params[:id])
-    authorize(@comment)
+    authorize(@comment.user)
     redirect_to @post if @comment.destroy
   end
 
