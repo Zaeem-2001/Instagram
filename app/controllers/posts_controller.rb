@@ -19,8 +19,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.all.order('created_at DESC')
+    @post = Post.includes(:user,:likes,:comments,{comments: :user}).find(params[:id])
+    @comments = @post.comments.includes(:user).all.order('created_at DESC')
     authorize(@post.user)
   end
 

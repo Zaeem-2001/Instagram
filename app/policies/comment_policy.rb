@@ -16,4 +16,7 @@ class CommentPolicy < ApplicationPolicy
   def destroy?
     @user.id == @comment.user_id || @user == @comment.post.user
   end
+  def edit?
+    @user.id == @comment.user_id
+  end
 end

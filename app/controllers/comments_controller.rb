@@ -14,22 +14,24 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = @post.comments.find(params[:id])
+    authorize(@comment.user)
   end
 
   def update
     @comment = @post.comments.find(params[:id])
-    authorize(@comment)
+    authorize(@comment.user)
     if @comment.update(comments_params)
       flash[:alert] = 'Comment updated successfully'
       redirect_to @post
     else
+      redirect_to edit_post_comment_path(@post,@comment)
       flash[:alert] = 'Something went wrong'
     end
   end
 
   def destroy
     @comment = @post.comments.find(params[:id])
-    authorize(@comment)
+    authorize(@comment.user)
     redirect_to @post if @comment.destroy
   end
 

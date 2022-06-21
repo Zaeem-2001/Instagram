@@ -1,8 +1,8 @@
 <h3>Update Comment</h3>
-<%= form_with  model: [@post, @post.comments.find(@comment.id)], url: post_comment_path do |form| %>
+<%= form_with  model: [@post, @comment], url: post_comment_path do |form| %>
 
   <p>
-    <%= form.text_area :body , class: 'text' , placeholder: 'Add a Comment ...', required: true%>
+    <%= form.text_area :body , class: 'text' , placeholder: 'Add a Comment ...'%>
   </p>
 
   <p>
