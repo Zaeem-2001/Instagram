@@ -14,14 +14,22 @@
     <br>
     <br>
     <br>
-<% if notice %>
-        <p class='alert alert-success' role='alert'><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class='alert alert-warning' role='alert'><%= alert %></p>
-      <% end %>
-    <br>
-
+    <% if notice %>
+      <p class='alert alert-success' role='alert'><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class='alert alert-warning' role='alert'><%= alert %></p>
+    <% end %>
+    <% if error %>
+    <div class="alert alert-danger" role="alert">
+      <p><%= pluralize(error.count, 'error') %> Prohibited record from being saved.</p>
+      <ul>
+        <% error.each do |message| %>
+          <li ><%= message  %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
     <%= yield %>
     <br>
     <%= render 'layouts/footer'%>

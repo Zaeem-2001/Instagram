@@ -14,7 +14,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post
     else
-      render 'new'
+      flash[:error] = @post.errors.full_messages
+      redirect_to new_post_path
     end
   end
 
@@ -35,7 +36,7 @@ class PostsController < ApplicationController
       flash[:notice] = 'Post updated successfully'
       redirect_to @post
     else
-      flash[:notice] = 'Something went wrong'
+      flash[:error] = @post.errors.full_messages
       render 'edit'
     end
   end
