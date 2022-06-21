@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  include HomeHelper
   def index
-    @user = current_user
+    @story=Story.folowing_stories(following)
+    @posts=Post.following_posts(following)
   end
+
 end

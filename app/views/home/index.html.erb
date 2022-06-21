@@ -1,7 +1,5 @@
-<% story=Story.folowing_stories(following)%>
-<%= render 'stories/story' , story: story%>
-<% posts=Post.following_posts(following)%>
-<% posts.each do |post|%>
+<%= render 'stories/story' , story: @story%>
+<% @posts.each do |post|%>
   <%= link_to post_path(post) do%>
     <div class="post-container postData-container ">
       <%= render 'posts/post' , post: post%>

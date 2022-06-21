@@ -6,10 +6,9 @@
   <%= comment.body %>
 </p>
 <p>
-  <% if policy(comment).destroy? %>
-  <%= link_to 'Destroy', post_comment_path(@post, comment), method: :delete ,remote: true,class: 'btn btn-danger'  %>
-  <%= link_to 'Edit', edit_post_comment_path(@post, comment) ,class: 'btn btn-primary' %>
-  <%end%>
+  <%= link_to 'Destroy', post_comment_path(@post, comment), method: :delete ,remote: true,class: 'btn btn-danger'    if policy(comment).destroy? %>
+  <%= link_to 'Edit', edit_post_comment_path(@post, comment) ,class: 'btn btn-primary' if policy(comment).edit? %>
+
 </p>
 <hr>
 <%end%>
