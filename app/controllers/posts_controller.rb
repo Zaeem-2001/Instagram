@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(posts_params)
     if @post.save
-      redirect_to @post
+      redirect_to user_path(current_user)
     else
       flash[:error] = @post.errors.full_messages
       redirect_to new_post_path
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
       redirect_to @post
     else
       flash[:error] = @post.errors.full_messages
-      render 'edit'
+      redirect_to edit_post_path
     end
   end
 
