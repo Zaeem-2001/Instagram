@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  before_action :set_post, only: %i[edit update create destroy]
-
+  before_action :set_post, only: %i[new edit update create destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   def create
     @comment = Comment.new(comments_params)
     if @comment.save
@@ -14,12 +14,10 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = @post.comments.find(params[:id])
     authorize(@comment.user)
   end
 
   def update
-    @comment = @post.comments.find(params[:id])
     authorize(@comment.user)
     if @comment.update(comments_params)
       flash[:alert] = 'Comment updated successfully'
@@ -31,9 +29,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = @post.comments.find(params[:id])
     authorize(@comment.user)
-    redirect_to @post if @comment.destroy
+    if @comment.destroy
+      redirect_to @post
+    else
+      redirect_to @post
+      flash[:error] = @comment.errors.full_messages
+    end
   end
 
   private
@@ -44,5 +46,9 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = @post.comments.find(params[:id])
   end
 end

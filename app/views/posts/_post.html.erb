@@ -4,8 +4,11 @@
       <div class="profile_img">
         <%=image_tag (post.user.image), class: 'cover' %>
       </div>
-      <h3><%= post.username%><br>
-        <span><%=  time_ago_in_words(post.created_at) + ' ago'%></span></h3>
+      <h3>
+          <%= post.username%>
+        <br>
+        <span><%=  time_ago(post) + ' ago'%></span>
+      </h3>
     </div>
     <div >
       <% if policy(post.user).update? %>
@@ -32,7 +35,7 @@
           <%end%>
         </div>
       </div>
-       <a class="carousel-control-prev" role="button" href="#myCarousel<%= post.id%>" data-slide="prev">
+      <a class="carousel-control-prev" role="button" href="#myCarousel<%= post.id%>" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       </a>
       <a class="carousel-control-next" role="button" href="#myCarousel<%= post.id%>" data-slide="next">
@@ -42,20 +45,15 @@
   </div>
   <div class="actionBtns">
     <div class="left">
-      <% pre_like = post.likes.find {|like| like.user_id == current_user.id } %>
-      <% if pre_like %>
-        <%= link_to  post_like_path(post, pre_like) , method: :delete , remote: true do%>
-          <%= image_tag('heart_red.png' ,:class => "heart") %>
-        <%end%>
-      <% else %>
-        <%= link_to   post_likes_path(post) ,method: :post ,remote: true do %>
-          <%= image_tag('heart.png' ,:class => "heart") %>
-        <%end%>
-      <% end %>
-      <%= image_tag('comment.png')%>
+      <%= render 'likes/like' , post: post%>
+      <%= link_to post_path(post) do%>
+        <%= image_tag('comment.png')%>
+      <%end%>
     </div>
   </div>
-  <h4 class="likes"><%= post.likes.count %> <%= (post.likes.count) == 1 ? ' like' : ' likes' %></h4>
+  <h4 class="likes"><%= pluralize(post.likes.count, 'like') %></h4>
   <h4 class="message"><b><%= post.username%></b> <%= post.caption%></h4>
-  <h4 class="comments">view all <%=post.comments.count%> <%= (post.comments.count) == 1 ? ' comment' : ' comments' %></h4>
+  <%= link_to post_path(post) do%>
+    <h4 class="comments">view all <%=post.comments.count%> <%= (post.comments.count) == 1 ? ' comment' : ' comments' %></h4>
+  <% end %>
 </div>

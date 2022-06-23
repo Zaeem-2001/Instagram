@@ -28,3 +28,6 @@
 /config/master.key
 /config/application.yml
 .env
+
+# Ignore application configuration
+/config/application.yml

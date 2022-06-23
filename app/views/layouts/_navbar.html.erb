@@ -1,41 +1,38 @@
 <% if user_signed_in?%>
-      <div class="navigation">
-        <div class="logo">
-          <%= link_to root_path , class:'no-underline' do %>
-            Instagram
-          <%end%>
+  <div class="navigation">
+    <div class="logo">
+      <%= link_to root_path , class:'no-underline' do %>
+        Instagram
+      <%end%>
+    </div>
+    <div class="navigation-search-container">
+      <i class="fa fa-search"></i>
+      <%= form_tag users_path, method: :get , remote: true do  %>
+        <%= text_field_tag :query, params[:query] %>
+        <div id="user-result">
         </div>
-        <div class="navigation-search-container">
-          <i class="fa fa-search"></i>
-            <%= form_tag users_path, method: :get , remote: true do  %>
-
-            <%= text_field_tag :query, params[:query] %>
-          <div id="user-result">
+      <%end%>
+      <div class="search-container">
+        <div class="search-container-box">
+          <div class="search-results">
           </div>
-            <%end%>
-          <div class="search-container">
-            <div class="search-container-box">
-              <div class="search-results">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="navigation-icons">
-          <%= link_to root_path , class:'navigation-link' do %>
-            <svg aria-label="Home" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M9.005 16.545a2.997 2.997 0 012.997-2.997h0A2.997 2.997 0 0115 16.545V22h7V11.543L12 2 2 11.543V22h7.005z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-          <% end %>
-          <%= link_to new_post_path , class:'navigation-link' do %>
-            <svg aria-label="New post" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line></svg>
-          <%end%>
-          <%= link_to user_path(current_user) , class:'navigation-link' do %>
-            <%# <i class="far fa-user-circle"></i> %>
-            <%=image_tag (current_user.image), class: 'rounded'  %>
-
-          <% end %>
-          <%= link_to destroy_user_session_path, method: :delete  , class:'navigation-link' do %>
-<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:30px;height:30px">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-</svg>          <% end %>
         </div>
       </div>
-    <%end%>
+    </div>
+    <div class="navigation-icons">
+      <%= link_to root_path , class:'navigation-link' do %>
+        <svg aria-label="Home" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M9.005 16.545a2.997 2.997 0 012.997-2.997h0A2.997 2.997 0 0115 16.545V22h7V11.543L12 2 2 11.543V22h7.005z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+      <% end %>
+      <%= link_to new_post_path , class:'navigation-link' do %>
+        <svg aria-label="New post" class="_ab6-" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line><line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line></svg>
+      <%end%>
+      <%= link_to user_path(current_user) , class:'navigation-link' do %>
+        <%=image_tag (current_user.image), class: 'rounded'  %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete  , class:'navigation-link' do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:30px;height:30px">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        </svg>          <% end %>
+    </div>
+  </div>
+<%end%>

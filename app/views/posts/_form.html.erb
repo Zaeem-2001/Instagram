@@ -1,5 +1,4 @@
 <%= form_with model: @post, remote: true do |f| %>
-<%= render "devise/shared/error_messages", resource: @post %>
 <div class="form-group">
     <%= f.label :caption %><br />
     <%= f.text_area  :caption , autofocus: true  %>

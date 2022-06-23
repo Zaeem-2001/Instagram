@@ -10,8 +10,8 @@
       <%if show?(@user)%>
         <div class="row user-username">
           <ul >
-            <li><%= @user.posts.count%> <%= (@user.posts.count) == 1 ? 'Post' : 'Posts' %></li>
-            <li><%= @user.followers.count%> <%= (@user.followers.count) == 1 ? 'Follower' : 'Followers' %></li>
+            <li><%= pluralize(@user.posts.count, 'Post') %></li>
+            <li><%= pluralize(@user.followers.count, 'Follower') %></li>
             <li><%= @user.followees.count%> Following </li>
           </ul>
         </div>
@@ -26,8 +26,7 @@
   </div>
   <%if own_account(@user)%>
     <section class="" style="margin-top:5%">
-      <% story=@user.stories.all%>
-      <%= render 'stories/story' , story: story%>
+    <%= render 'stories/story' , story: @user.stories.all%>
     </section>
   <%end%>
   <br>
@@ -38,7 +37,7 @@
   <hr>
   <h2 style="text-align:center">Posts</h2>
   <%if show?(@user)%>
-    <% @user.posts.each do |post|%>
+    <% @posts.each do |post|%>
       <%= link_to post_path(post) do%>
         <div class="post-container postData-container">
           <%= render 'posts/post' , post: post%>

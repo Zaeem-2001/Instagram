@@ -14,18 +14,23 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.id == @creater_user.id
+    own_post?
   end
 
   def destroy?
-    @user.id == @creater_user.id
+    own_post?
   end
 
   def edit?
-    @user.id == @creater_user.id
+    own_post?
   end
 
   def show?
-    @user.id == @creater_user.id || @creater_user.followees.where(user_id: @user.id)
+    own_post? || @creater_user.followees.where(user_id: @user.id)
+  end
+
+  private
+  def own_post?
+    @user.id == @creater_user.id
   end
 end

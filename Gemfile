@@ -77,3 +77,5 @@ gem 'pundit', '~> 2.2'
 gem 'active_storage_validations'
 
 gem 'cloudinary'
+
+gem 'figaro'

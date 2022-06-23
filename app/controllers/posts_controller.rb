@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[edit update destroy]
   def index
     @posts = Post.all
   end
@@ -21,16 +22,15 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user,:likes,:comments,{comments: :user}).find(params[:id])
-    @comments = @post.comments.includes(:user).all.order('created_at DESC')
+    @comments = @post.comments.includes(:user).ordered_desc
     authorize(@post.user)
   end
 
   def edit
-    @post = Post.find(params[:id])
+    authorize(@post.user)
   end
 
   def update
-    @post = Post.find(params[:id])
     authorize(@post.user)
     if @post.update(posts_params)
       flash[:notice] = 'Post updated successfully'
@@ -42,13 +42,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     authorize(@post.user)
-    if @post.destroy!
+    if @post.destroy
+
       redirect_to current_user
     else
       redirect_to @post
-      flash[:notice] = 'Something went wrong'
+      flash[:error] = @post.errors.full_messages
     end
   end
 
@@ -56,5 +56,9 @@ class PostsController < ApplicationController
 
   def posts_params
     params.require(:post).permit(:caption, images: [])
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

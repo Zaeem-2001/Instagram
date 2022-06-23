@@ -1,7 +1,7 @@
  <div class="container row">
 
     <% if !own_account(@user) %>
-    <% if current_user.followees.include?(@user) %>
+    <% if is_follower?(@user) %>
         <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST" , class: 'btn btn-danger follow-btn' %></h5>
     <% else %>
         <h5><%= button_to "Follow", follow_user_path, method: "POST" , class: 'btn btn-success follow-btn' %></h5>

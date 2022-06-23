@@ -2,12 +2,12 @@
 
 class StoriesController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :destroy
+  before_action :set_stories , only: %i[show destroy]
   def new
     @story = current_user.stories.build
   end
 
   def show
-    @story = Story.find(params[:id])
     render layout: false
   end
 
@@ -22,7 +22,6 @@ class StoriesController < ApplicationController
   end
 
   def destroy
-    @story = Story.find(params[:id])
     authorize(@story.user)
     if @story.destroy
       flash[:notice] = 'Story was successfully destroyed'
@@ -34,7 +33,9 @@ class StoriesController < ApplicationController
   end
 
   private
-
+  def set_stories
+    @story = Story.find(params[:id])
+  end
   def stories_params
     params.require(:story).permit(:image)
   end

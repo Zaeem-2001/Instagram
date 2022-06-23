@@ -8,4 +8,8 @@ module UsersHelper
   def own_account(user)
     user.id == current_user.id
   end
+
+  def is_follower?(user)
+    current_user.followees.include?(user)
+  end
 end

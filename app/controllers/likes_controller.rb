@@ -4,13 +4,13 @@ class LikesController < ApplicationController
   before_action :find_post
   before_action :already_liked?
   def create
-    @post.likes.create!(user_id: current_user.id)
+    @post.likes.create(user_id: current_user.id)
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
     @like = @post.likes.find(params[:id])
-    @like.destroy!
+    @like.destroy
     redirect_back(fallback_location: root_path)
   end
 
@@ -21,6 +21,6 @@ class LikesController < ApplicationController
   end
 
   def already_liked?
-    Like.where(user_id: current_user.id, post_id: Post.find(params[:post_id])).exists?
+    Like.where(user_id: current_user.id, post_id: @post).exists?
   end
 end

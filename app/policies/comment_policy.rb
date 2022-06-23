@@ -14,9 +14,14 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.id == @comment.user_id || @user == @comment.post.user
+    own_comment? || @user == @comment.post.user
   end
   def edit?
+    own_comment?
+  end
+
+  private
+  def own_comment?
     @user.id == @comment.user_id
   end
 end
